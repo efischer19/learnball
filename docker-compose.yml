@@ -10,6 +10,7 @@ services:
         ports:
             - "3306:3306"
         healthcheck:
+            # figure out how to inject "create users for other services" into this healthcheck
             test: ["CMD", "mysql", "--version"]
             interval: 10s
             timeout: 2s
@@ -29,8 +30,3 @@ services:
             - ./tg_records:/code
         links:
             - sql
-        healthcheck:
-            test: ["CMD", "sh", "/code/ensure_sql_user.sh"]
-            interval: 15s
-            timeout: 5s
-            retries: 6
