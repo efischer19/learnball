@@ -1,17 +1,36 @@
 version: '3'
 
 services:
-    db:
+    sql:
         image: mysql
-        environment:
-            - MYSQL_ROOT_PASSWORD=demo
-            - MYSQL_DATABASE=learnball
-    web:
-        build: .
-        command: python3 manage.py runserver 0.0.0.0:8000
         volumes:
-            - .:/code
+            - ./private/data/${INSTANCE}:/data
+        env_file:
+            - ./private/conf/${INSTANCE}/learnball_sql.env
+        ports:
+            - "3306:3306"
+        healthcheck:
+            test: ["CMD", "mysql", "--version"]
+            interval: 10s
+            timeout: 2s
+            retries: 6
+
+    tg_records:
+        build: ./tg_records
+        command: python3 /code/manage.py runserver 0.0.0.0:8000
         ports:
             - "8000:8000"
         depends_on:
-            - db
+            - sql
+        env_file:
+            - ./private/conf/${INSTANCE}/tg_records.env
+            - ./private/conf/${INSTANCE}/learnball_sql.env
+        volumes:
+            - ./tg_records:/code
+        links:
+            - sql
+        healthcheck:
+            test: ["CMD", "sh", "/code/ensure_sql_user.sh"]
+            interval: 15s
+            timeout: 5s
+            retries: 6
