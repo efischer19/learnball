@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-    sql:
+    sql_root:
         image: mysql
         volumes:
             - ./private/data/${INSTANCE}:/data
@@ -22,11 +22,11 @@ services:
         ports:
             - "8000:8000"
         depends_on:
-            - sql
+            - sql_root
         env_file:
             - ./private/conf/${INSTANCE}/tg_records.env
             - ./private/conf/${INSTANCE}/learnball_sql.env
         volumes:
             - ./tg_records:/code
         links:
-            - sql
+            - sql_root
