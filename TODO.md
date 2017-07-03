@@ -1,9 +1,7 @@
 Next steps:
 
     -proper division of open source/private data in project
-        -sql user/pwd, other instance-specific config
-        -actual data in database - is this included in docker image? do NOT push that
-        -gitignore
+        -sql user/pwd setup is being dumb, get that working
     -Travis integration
         -basic CI tests (all containers up)
         -individual container tests as needed
