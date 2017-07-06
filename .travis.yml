@@ -1,12 +1,12 @@
 sudo: required
 
 language: python
+python: "3.5"
 
 services:
     - docker
 
-python:
-    - "3.5"
+install: "pip install -r requirements.txt"
 
 before_script:
       - sudo /etc/init.d/mysql stop
