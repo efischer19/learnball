@@ -6,7 +6,7 @@ python: "3.5"
 services:
     - docker
 
-install: "pip install -r requirements.txt"
+install: "pip install -r */requirements.txt"
 
 before_script:
       - sudo /etc/init.d/mysql stop
