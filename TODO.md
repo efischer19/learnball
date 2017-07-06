@@ -1,9 +1,12 @@
 Next steps:
 
     -proper division of open source/private data in project
-        -sql user/pwd, other instance-specific config
-        -actual data in database - is this included in docker image? do NOT push that
-        -gitignore
+        -sql user/pwd setup is being dumb, get that working
+    -Travis integration
+        -basic CI tests (all containers up)
+        -individual container tests as needed
+        -fake secrets for this
+        -quality checking (pep8, eslint?)
     -investigate easiest route to simple data webapp
         -DRF? is that still a thing?
         -remember - this first step is a backend web service, not a frontend one.
